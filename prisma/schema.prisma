@@ -1,0 +1,249 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user tbl_usuarios @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int          @id @default(autoincrement())
+  sessionToken String       @unique
+  userId       Int
+  expires      DateTime
+  user         tbl_usuarios @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model tbl_usuarios {
+  id                  Int                   @id @default(autoincrement())
+  nombre              String
+  apellido            String
+  username            String                @db.VarChar(255)
+  password            String                @db.VarChar(255)
+  image               String?
+  direccion           String?
+  Telefono            Int
+  rol_id              Int
+  area_id             Int
+  email               String                @unique
+  accounts            Account[]
+  sessions            Session[]
+  Estado              Boolean               @default(true)
+  rol                 tbl_rol               @relation(fields: [rol_id], references: [id])
+  area                tbl_area              @relation(fields: [area_id], references: [id])
+  tbl_Remitentes      tbl_Remitentes[]
+  tbl_asignaciones    tbl_asignaciones[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model tbl_tramites {
+  id                  Int                   @default(autoincrement())
+  correlativo         String                @unique
+  fecha_inicio        DateTime              @db.Date
+  fecha_fin           DateTime?             @db.Date
+  id_estado           Int
+  tt_id               Int
+  sol_id              Int
+  client_id           Float
+  tipotramite         tbl_tipotramites      @relation(fields: [tt_id], references: [id])
+  solicitud           tbl_solicitud         @relation(fields: [sol_id], references: [id])
+  cliente             tbl_clientes          @relation(fields: [client_id], references: [DPI])
+  tbl_asignaciones    tbl_asignaciones[]
+
+  @@id([id, correlativo])
+}
+
+model tbl_rol {
+  id           Int            @id @default(autoincrement())
+  nombre       String
+  descripcion  String         @default("Rol EMMQ")
+  tbl_usuarios tbl_usuarios[]
+  Estado       Boolean        @default(true)
+}
+
+model tbl_area {
+  id           Int            @id @default(autoincrement())
+  nombre       String
+  descripcion  String         @default("Area EMMQ")
+  Estado       Boolean        @default(true)
+  tbl_usuarios tbl_usuarios[]
+}
+
+model tbl_requisitott {
+  id           Int              @id @default(autoincrement())
+  tt_id        Int
+  requisito_id Int
+  Estado       Boolean          @default(true)
+  tipotramite  tbl_tipotramites @relation(fields: [tt_id], references: [id])
+  requisito    tbl_requisito    @relation(fields: [requisito_id], references: [id])
+}
+
+model tbl_estadosolicitud {
+  id            Int             @id @default(autoincrement())
+  nombre        String
+  Estado        Boolean         @default(true)
+  tbl_solicitud tbl_solicitud[]
+}
+
+//fecha datetime @db.date
+model tbl_solicitud {
+  id                 Int                 @id @default(autoincrement())
+  Motivo             String
+  Fecha              DateTime            @db.Date
+  tipotra_id         Int
+  cliente_dpi        Float
+  estadosolicitud    tbl_estadosolicitud @relation(fields: [estadosolicitud_id], references: [id])
+  estadosolicitud_id Int
+  comentario         String?
+
+  tbl_tramites tbl_tramites[]
+  tipotramite  tbl_tipotramites @relation(fields: [tipotra_id], references: [id])
+  clientes     tbl_clientes     @relation(fields: [cliente_dpi], references: [DPI])
+}
+
+model tbl_tipotramites {
+  id              Int               @id @default(autoincrement())
+  Nombre          String
+  Nomenclatura    String            @db.VarChar(45)
+  tiempo_promedio String
+  Descripcion     String            @default("Descripcion tipo de trámite")
+  Estado          Boolean           @default(true)
+  tbl_solicitud   tbl_solicitud[]
+  tbl_requisitott tbl_requisitott[]
+  tbl_tramites    tbl_tramites[]
+  tbl_paso        tbl_paso[]
+}
+
+model tbl_requisito {
+  id              Int               @id @default(autoincrement())
+  Nombre          String
+  Descripcion     String            @default("Descripcion requisito")
+  Estado          Boolean           @default(true)
+  tbl_requisitott tbl_requisitott[]
+}
+
+model tbl_clientes {
+  id            Int             @id @default(autoincrement())
+  DPI           Float           @unique
+  Nombre        String          @db.Char(200)
+  Apellido      String          @db.Char(200)
+  Correo        String          @db.VarChar(200)
+  Telefono      Float           
+  NIM           Float           
+  NIT           Float           
+  Estado        Boolean         @default(true)
+  tbl_solicitud tbl_solicitud[]
+  tbl_tramites  tbl_tramites[]
+}
+
+model tbl_tipotramite {
+  id             Int     @id @default(autoincrement())
+  Nombre         String  @db.Char(200)
+  Nomenclatura   String  @db.VarChar(200)
+  Tiempopromedio Float   
+  Descripcion    String
+  Estado         Boolean @default(true)
+}
+
+model tbl_estadotramite {
+  id          Int     @id @default(autoincrement())
+  Nombre      String  @db.Char(200)
+  Color       String  @db.VarChar(200)
+  Descripcion String
+  Estado      Boolean @default(true)
+}
+
+model tbl_departamento {
+  id            Int             @id @default(autoincrement())
+  Nombre        String          @db.Char(200)
+  Descripcion   String
+  tbl_actividad tbl_actividad[]
+  Estado        Boolean         @default(true)
+  tbl_paso      tbl_paso[]
+}
+
+model tbl_permiso {
+  id          Int     @id @default(autoincrement())
+  Nombre      String  @db.Char(200)
+  Descripcion String
+  Estado      Boolean @default(true)
+}
+
+model tbl_actividad {
+  id              Int              @id @default(autoincrement())
+  Nombre          String           @db.Char(200)
+  Descripcion     String
+  departamento_id Int
+  Estado          Boolean          @default(true)
+  departamento    tbl_departamento @relation(fields: [departamento_id], references: [id])
+  tbl_paso        tbl_paso[]
+}
+
+model tbl_paso {
+  id                  Int                   @id @default(autoincrement())
+  Nombre              String                @db.Char(200)
+  Descripcion         String
+  Estado              Boolean               @default(true)
+  departamento_id     Int
+  actividad_id        Int
+  tipoTramite_id      Int
+  secuencia           Int
+  departamentos       tbl_departamento      @relation(fields: [departamento_id], references: [id])
+  actividades         tbl_actividad         @relation(fields: [actividad_id], references: [id])
+  tiposTramites       tbl_tipotramites      @relation(fields: [tipoTramite_id], references: [id])
+  tbl_asignaciones    tbl_asignaciones[]
+}
+
+model tbl_Remitentes {
+  id           Int                @id @default(autoincrement())
+  usuarios     tbl_usuarios       @relation(fields: [Usuario_id], references: [id])
+  Usuario_id   Int
+  Fecha        DateTime           @default(now())
+  asignaciones tbl_asignaciones[]
+}
+
+model tbl_asignaciones {
+  id            Int            @id @default(autoincrement())
+  Fecha         DateTime       @default(now())
+  Estado        Boolean
+  paso_id       Int
+  tbl_paso      tbl_paso       @relation(fields: [paso_id], references: [id])
+  Correlativo   String
+  tbl_tramite   tbl_tramites   @relation(fields: [Correlativo], references: [correlativo])
+  usuarios      tbl_usuarios   @relation(fields: [Destinatarios], references: [id])
+  Destinatarios Int
+  remitentes    tbl_Remitentes @relation(fields: [Remitente_id], references: [id])
+  Remitente_id  Int            @unique
+}
