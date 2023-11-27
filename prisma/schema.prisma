@@ -3,13 +3,12 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/client"
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -40,24 +39,24 @@ model Session {
 }
 
 model tbl_usuarios {
-  id                  Int                   @id @default(autoincrement())
-  nombre              String
-  apellido            String
-  username            String                @db.VarChar(255)
-  password            String                @db.VarChar(255)
-  image               String?
-  direccion           String?
-  Telefono            Int
-  rol_id              Int
-  area_id             Int
-  email               String                @unique
-  accounts            Account[]
-  sessions            Session[]
-  Estado              Boolean               @default(true)
-  rol                 tbl_rol               @relation(fields: [rol_id], references: [id])
-  area                tbl_area              @relation(fields: [area_id], references: [id])
-  tbl_Remitentes      tbl_Remitentes[]
-  tbl_asignaciones    tbl_asignaciones[]
+  id               Int                @id @default(autoincrement())
+  nombre           String
+  apellido         String
+  username         String             @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  image            String?
+  direccion        String?
+  Telefono         Int
+  rol_id           Int
+  area_id          Int
+  email            String             @unique
+  accounts         Account[]
+  sessions         Session[]
+  Estado           Boolean            @default(true)
+  rol              tbl_rol            @relation(fields: [rol_id], references: [id])
+  area             tbl_area           @relation(fields: [area_id], references: [id])
+  tbl_Remitentes   tbl_Remitentes[]
+  tbl_asignaciones tbl_asignaciones[]
 }
 
 model VerificationToken {
@@ -69,18 +68,18 @@ model VerificationToken {
 }
 
 model tbl_tramites {
-  id                  Int                   @default(autoincrement())
-  correlativo         String                @unique
-  fecha_inicio        DateTime              @db.Date
-  fecha_fin           DateTime?             @db.Date
-  id_estado           Int
-  tt_id               Int
-  sol_id              Int
-  client_id           Float
-  tipotramite         tbl_tipotramites      @relation(fields: [tt_id], references: [id])
-  solicitud           tbl_solicitud         @relation(fields: [sol_id], references: [id])
-  cliente             tbl_clientes          @relation(fields: [client_id], references: [DPI])
-  tbl_asignaciones    tbl_asignaciones[]
+  id               Int                @default(autoincrement())
+  correlativo      String             @unique
+  fecha_inicio     DateTime           @db.Date
+  fecha_fin        DateTime?          @db.Date
+  id_estado        Int
+  tt_id            Int
+  sol_id           Int
+  client_id        Float
+  tipotramite      tbl_tipotramites   @relation(fields: [tt_id], references: [id])
+  solicitud        tbl_solicitud      @relation(fields: [sol_id], references: [id])
+  cliente          tbl_clientes       @relation(fields: [client_id], references: [DPI])
+  tbl_asignaciones tbl_asignaciones[]
 
   @@id([id, correlativo])
 }
@@ -160,9 +159,9 @@ model tbl_clientes {
   Nombre        String          @db.Char(200)
   Apellido      String          @db.Char(200)
   Correo        String          @db.VarChar(200)
-  Telefono      Float           
-  NIM           Float           
-  NIT           Float           
+  Telefono      Float
+  NIM           Float
+  NIT           Float
   Estado        Boolean         @default(true)
   tbl_solicitud tbl_solicitud[]
   tbl_tramites  tbl_tramites[]
@@ -172,7 +171,7 @@ model tbl_tipotramite {
   id             Int     @id @default(autoincrement())
   Nombre         String  @db.Char(200)
   Nomenclatura   String  @db.VarChar(200)
-  Tiempopromedio Float   
+  Tiempopromedio Float
   Descripcion    String
   Estado         Boolean @default(true)
 }
@@ -212,18 +211,18 @@ model tbl_actividad {
 }
 
 model tbl_paso {
-  id                  Int                   @id @default(autoincrement())
-  Nombre              String                @db.Char(200)
-  Descripcion         String
-  Estado              Boolean               @default(true)
-  departamento_id     Int
-  actividad_id        Int
-  tipoTramite_id      Int
-  secuencia           Int
-  departamentos       tbl_departamento      @relation(fields: [departamento_id], references: [id])
-  actividades         tbl_actividad         @relation(fields: [actividad_id], references: [id])
-  tiposTramites       tbl_tipotramites      @relation(fields: [tipoTramite_id], references: [id])
-  tbl_asignaciones    tbl_asignaciones[]
+  id               Int                @id @default(autoincrement())
+  Nombre           String             @db.Char(200)
+  Descripcion      String
+  Estado           Boolean            @default(true)
+  departamento_id  Int
+  actividad_id     Int
+  tipoTramite_id   Int
+  secuencia        Int
+  departamentos    tbl_departamento   @relation(fields: [departamento_id], references: [id])
+  actividades      tbl_actividad      @relation(fields: [actividad_id], references: [id])
+  tiposTramites    tbl_tipotramites   @relation(fields: [tipoTramite_id], references: [id])
+  tbl_asignaciones tbl_asignaciones[]
 }
 
 model tbl_Remitentes {
