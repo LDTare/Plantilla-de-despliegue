@@ -9,7 +9,7 @@ export const config = { matcher: [
     '/estadotramite/:path*',
     '/permiso/:path*',
     '/pasos/:path*',
-    'requisitos/:path*',
+    '/requisitos/:path*',
     '/requisitossolicitud/:path*',
     '/registro/:path*',
     '/solicitudes/:path*',
