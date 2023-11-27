@@ -1,5 +1,5 @@
 import { prisma } from "@/libs/prisma";
-import Buttons from "./buttons";
+import Buttons from "./Buttons";
 
 async function loadArea(areaID) {
   const res = await prisma.tbl_area.findUnique({

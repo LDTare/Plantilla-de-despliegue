@@ -1,2 +1,2 @@
-import newestadotramitepage from "../../new/page";
+import newestadotramitepage from "../new/page";
 export default newestadotramitepage

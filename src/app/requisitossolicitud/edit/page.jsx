@@ -1,2 +1,2 @@
-import newrequisitossolicitudpage from "../../new/page";
+import newrequisitossolicitudpage from "../new/page";
 export default newrequisitossolicitudpage

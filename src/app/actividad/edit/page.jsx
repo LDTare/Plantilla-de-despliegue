@@ -1,2 +1,2 @@
-import newactividadpage from "../../new/page";
-export default newactividadpage
+import newactividadpage from "../new/page";
+export default newactividadpage;
