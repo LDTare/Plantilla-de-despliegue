@@ -45,9 +45,9 @@ async function pasosDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {pasos.map((paso) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={paso.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">{paso.id}</td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {paso.Nombre}
@@ -65,8 +65,8 @@ async function pasosDashPage() {
                         <Paso_btnTable paso={paso} key={paso.id} />
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

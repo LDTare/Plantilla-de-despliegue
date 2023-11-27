@@ -36,9 +36,9 @@ async function PermisoDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {permiso.map((permiso) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                    <tr key={permiso.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                       <td className="whitespace-nowrap px-6 py-4">
                         {permiso.Nombre}
                       </td>
@@ -52,8 +52,8 @@ async function PermisoDashPage() {
                         ></Permisotable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

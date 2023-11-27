@@ -80,10 +80,9 @@ async function solicitudDashPage() {
                     </th>
                   </tr>
                 </thead>
-                {solicitudes.map((soli) => (
-                  <tbody>
-
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                <tbody>
+                {solicitudes.map((soli) => ( 
+                    <tr key={soli.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">{soli.id}</td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {soli.Motivo}
@@ -104,8 +103,8 @@ async function solicitudDashPage() {
                         <Solicitud_Table soli={soli} key={soli.id} />
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

@@ -36,9 +36,9 @@ async function DepartamentoDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {departamento.map((departamento) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-600">
+                    <tr key={departamento.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-600">
                       <td className="whitespace-nowrap px-6 py-4">
                         {departamento.Nombre}
                       </td>
@@ -52,8 +52,8 @@ async function DepartamentoDashPage() {
                         ></Departamentotable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

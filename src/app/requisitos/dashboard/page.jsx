@@ -36,9 +36,9 @@ async function RequisitosDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {requisitos.map((requisitos) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={requisitos.id} className="border-b transition duration-300 ease-in-out hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">
                         {requisitos.Nombre}
                       </td>
@@ -52,8 +52,8 @@ async function RequisitosDashPage() {
                         ></Requisitostable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

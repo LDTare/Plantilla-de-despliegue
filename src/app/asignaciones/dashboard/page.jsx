@@ -54,9 +54,9 @@ async function asignacionesDashpage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {asignaciones.map((asignacion) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={asignacion.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">{asignacion.id}</td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {asignacion.Fecha.toDateString()}
@@ -76,9 +76,9 @@ async function asignacionesDashpage() {
                       <td className=" whitespace-nowrap px-6 py-4">
                         Ver actividad
                       </td>
-                    </tr>
-                  </tbody>
+                    </tr>    
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

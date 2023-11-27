@@ -51,9 +51,9 @@ async function clientesDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {clientes.map((clientes) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={clientes.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">
                         {Number(clientes.DPI)}
                       </td>
@@ -82,8 +82,8 @@ async function clientesDashPage() {
                         ></ClientesTable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

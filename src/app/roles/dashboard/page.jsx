@@ -31,9 +31,9 @@ async function rolesDashPage() {
                     <th scope="col" className="px-6 py-4">Acciones</th>
                   </tr>
                 </thead>
+                <tbody>
                 {roles.map((rol) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={rol.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                         <td className="whitespace-nowrap px-6 py-4">{rol.id}</td>
                       <td className="whitespace-nowrap px-6 py-4">{rol.nombre}</td>
                       <td className="whitespace-nowrap px-6 py-4">{rol.descripcion}</td>
@@ -42,8 +42,8 @@ async function rolesDashPage() {
                         </RolTable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

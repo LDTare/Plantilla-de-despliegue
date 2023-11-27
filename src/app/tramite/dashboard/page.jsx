@@ -37,9 +37,9 @@ async function tramitesDashPage() {
                     <th scope="col" className="px-6 py-4">Acciones</th>
                   </tr>
                 </thead>
+                <tbody >
                 {tramites.map((tramite) => (
-                  <tbody key={tramite.id}>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={tramite.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">{tramite.correlativo}</td>
                       <td className="whitespace-nowrap px-6 py-4">{tramite.fecha_inicio.toISOString()}</td>
                       <td className="whitespace-nowrap px-6 py-4">{tramite.fecha_fin ? tramite.fecha_fin.toISOString() : ""}</td>
@@ -51,8 +51,8 @@ async function tramitesDashPage() {
                         </TramiteTable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

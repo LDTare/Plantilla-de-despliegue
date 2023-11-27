@@ -39,8 +39,8 @@ async function EstadotramiteDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {estadotramite.map((estadotramite) => (
-                  <tbody>
                     <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">
                         {estadotramite.Nombre}
@@ -58,8 +58,8 @@ async function EstadotramiteDashPage() {
                         ></Estadotramitetable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

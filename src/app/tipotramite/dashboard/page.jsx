@@ -42,9 +42,9 @@ async function TipotramiteDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {tipotramite.map((tipotramite) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={tipotramite.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">
                         {tipotramite.Nombre}
                       </td>
@@ -64,8 +64,8 @@ async function TipotramiteDashPage() {
                         ></Tipotramitetable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>

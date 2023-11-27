@@ -39,9 +39,9 @@ async function ActividadDashPage() {
                     </th>
                   </tr>
                 </thead>
+                <tbody>
                 {actividad.map((actividad) => (
-                  <tbody>
-                    <tr className="border-b transition duration-300 ease-in-out hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
+                    <tr key={actividad.id} className="border-b transition duration-300 ease-in-out hover:bg-slate-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className=" whitespace-nowrap px-6 py-4">
                         {actividad.id}
                       </td>
@@ -58,8 +58,8 @@ async function ActividadDashPage() {
                         ></Actividadtable>
                       </td>
                     </tr>
-                  </tbody>
                 ))}
+                </tbody>
               </table>
             </div>
           </div>
