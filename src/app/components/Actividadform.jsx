@@ -3,7 +3,6 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SelectDepartamento from "./Selectdepartamento";
-import UploadForm from "./Uploadimage";
 
 function Actividadform() {
   const [actividad, setActividad] = useState({
@@ -134,13 +133,6 @@ function Actividadform() {
           </label>
           <SelectDepartamento handleChange={Handledchance} />
           <div>
-            <input
-              className="border px-3 py-2 rounded-lg mb-4 w-full"
-              type="file"
-              name=""
-              id=""
-              onChange={(e) => uploadFile(e.target.files[0])}
-            />
           </div>
 
           <button onClick={Handledonsubmit} className=" bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 focus:outline-none shadow-lg mt-6">
