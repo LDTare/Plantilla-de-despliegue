@@ -6,6 +6,8 @@ async function loadRequisitos() {
   return await prisma.tbl_requisito.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function RequisitosDashPage() {
   const requisitos = await loadRequisitos();
   return (

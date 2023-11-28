@@ -8,6 +8,8 @@ async function loadPasos() {
   });
 }
 
+export const dynamic = 'force-dynamic'
+
 async function pasosDashPage() {
   const pasos = await loadPasos();
   return (

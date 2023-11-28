@@ -6,6 +6,8 @@ async function loadClientes() {
   return await prisma.tbl_clientes.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function clientesDashPage() {
   const clientes = await loadClientes();
   return (

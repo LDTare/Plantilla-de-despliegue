@@ -6,6 +6,8 @@ async function loadDepartamento() {
   return await prisma.tbl_departamento.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function DepartamentoDashPage() {
   const departamento = await loadDepartamento();
   return (

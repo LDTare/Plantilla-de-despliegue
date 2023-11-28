@@ -6,6 +6,8 @@ async function loadActividad() {
   return await prisma.tbl_actividad.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function ActividadDashPage() {
   const actividad = await loadActividad();
   return (

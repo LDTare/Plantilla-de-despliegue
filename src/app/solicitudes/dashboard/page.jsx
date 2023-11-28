@@ -9,6 +9,9 @@ async function loadSolicitudes() {
     include:{estadosolicitud:true,tipotramite:true}
   });
 }
+
+export const dynamic = 'force-dynamic'
+
 async function solicitudDashPage() {
   const solicitudes = await loadSolicitudes();
   const estadosolicitudIds = solicitudes.map((soli) => soli.estadosolicitud_id);

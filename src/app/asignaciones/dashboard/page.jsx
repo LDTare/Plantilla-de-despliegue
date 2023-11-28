@@ -12,6 +12,8 @@ async function lodadAsignaciones() {
   });
 }
 
+export const dynamic = 'force-dynamic'
+
 async function asignacionesDashpage() {
   const asignaciones = await lodadAsignaciones();
   return (

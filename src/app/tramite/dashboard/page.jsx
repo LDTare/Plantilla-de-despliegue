@@ -10,6 +10,8 @@ async function loadTramites() {
   });
 }
 
+export const dynamic = 'force-dynamic'
+
 async function tramitesDashPage() {
   const tramites = await loadTramites();
 

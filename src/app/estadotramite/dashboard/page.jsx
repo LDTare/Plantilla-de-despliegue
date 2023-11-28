@@ -6,6 +6,8 @@ async function loadEstadotrmite() {
   return await prisma.tbl_estadotramite.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function EstadotramiteDashPage() {
   const estadotramite = await loadEstadotrmite();
   return (

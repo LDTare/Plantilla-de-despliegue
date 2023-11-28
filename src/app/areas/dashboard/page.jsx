@@ -7,6 +7,8 @@ async function loadAreas() {
   return await prisma.tbl_area.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function areaDashPage() {
   const areas = await loadAreas();
   return (

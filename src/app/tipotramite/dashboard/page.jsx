@@ -6,6 +6,8 @@ async function loadTipotramite() {
   return await prisma.tbl_tipotramites.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function TipotramiteDashPage() {
   const tipotramite = await loadTipotramite();
   return (

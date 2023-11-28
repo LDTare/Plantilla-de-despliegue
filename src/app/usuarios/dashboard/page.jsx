@@ -6,6 +6,8 @@ async function loadUsers() {
   return await prisma.tbl_usuarios.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function usersDashPage() {
   const usuarios = await loadUsers();
 

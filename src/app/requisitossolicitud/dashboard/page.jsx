@@ -11,6 +11,8 @@ async function loadRequisitossolicitud() {
   });
 }
 
+export const dynamic = 'force-dynamic'
+
 async function RequisitossolicitudDashPage() {
   const requisitossolicitud = await loadRequisitossolicitud();
   return (

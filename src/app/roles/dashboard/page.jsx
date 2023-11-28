@@ -7,6 +7,8 @@ async function loadRoles() {
   return await prisma.tbl_rol.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function rolesDashPage() {
   const roles = await loadRoles();
 

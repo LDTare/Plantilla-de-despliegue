@@ -6,6 +6,8 @@ async function loadPermiso() {
   return await prisma.tbl_permiso.findMany();
 }
 
+export const dynamic = 'force-dynamic'
+
 async function PermisoDashPage() {
   const permiso = await loadPermiso();
   return (
