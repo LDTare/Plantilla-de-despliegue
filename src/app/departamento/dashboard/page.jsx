@@ -23,7 +23,7 @@ async function DepartamentoDashPage() {
       <div className="flex flex-col">
         <div className=" overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className=" inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div className=" overflow-hidden bg-indigo-700">
+            <div className=" overflow-hidden bg-slate-400">
               <table className="min-w-full text-left text-sm font-light">
                 <thead>
                   <tr className="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
@@ -40,14 +40,14 @@ async function DepartamentoDashPage() {
                 </thead>
                 <tbody>
                 {departamento.map((departamento) => (
-                    <tr key={departamento.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-600">
+                    <tr key={departamento.id} className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-slate-500 dark:hover:bg-slate-300 text-black">
                       <td className="whitespace-nowrap px-6 py-4">
                         {departamento.Nombre}
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         {departamento.Descripcion}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-3">
+                      <td className="whitespace-nowrap px-4 py-3 text-white">
                         <Departamentotable
                           departamento={departamento}
                           key={departamento.id}

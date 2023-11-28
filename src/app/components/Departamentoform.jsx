@@ -88,11 +88,11 @@ function Departamentoform() {
           <button className=" bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 focus:outline-none shadow-lg mt-6">
             {params.id
               ? "Actualizar el departamento"
-              : "Crear un nuevo departamento"}
+              : "Crear departamento"}
           </button>
           <button
             className="bg-rose-500 hover:bg-rose-700 text-white font-bold
-            py-2 px-4 mx-5 rounded focus:outline-none shadow-lg mt-6"
+            py-2 px-4 mx-2 rounded focus:outline-none shadow-lg mt-6"
             onClick={() => {
               router.push("/departamento/dashboard");
             }}
