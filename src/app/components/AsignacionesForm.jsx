@@ -51,11 +51,6 @@ function AsignacionForm() {
       Usuario_id: session?.user?.id,
     });
 
-    setAsignacion({
-      ...asignacion,
-      Remitente_id: remitente?.Usuario_id,
-    });
-
     if (!params.id) {
       console.log(remitente);
       const resRemitente = await fetch("/api/remitentes", {
@@ -66,7 +61,10 @@ function AsignacionForm() {
         },
       });
       if (resRemitente.ok) {
-        console.log(asignacion);
+        setAsignacion({
+          ...asignacion,
+          Remitente_id: remitente,
+        });
         const resAsignacion = await fetch("/api/asignaciones", {
           method: "POST",
           body: JSON.stringify(asignacion),
